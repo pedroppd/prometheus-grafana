@@ -1,14 +1,11 @@
 const express = require('express');
-const {PORT} = require('./constants/constants');
 const prom = require('prom-client');
+const { PORT } = require('./constants/constants');
+const { counter } = require('./metrics/Counter');
+const counterInstance = counter('counter_request', 'help_request');
 const app = express();
 
-const counter = new prom.Counter({
-    name: 'metric_name',
-    help: 'metric_help',
-  });
-  counter.inc();
-  counter.inc(10);
+
 
 
 app.listen(PORT, () => {
@@ -16,5 +13,12 @@ app.listen(PORT, () => {
 });
 
 app.get('/produtos', (req, res) => {
+    console.info(`Bati aqui`);
+    counterInstance.inc();
     res.json({ "message": "Working" });
+});
+
+app.get('/metrics', async (req, res) => {
+    res.set('Content-Type', prom.register.contentType);
+    res.end(await prom.register.metrics());
 });
