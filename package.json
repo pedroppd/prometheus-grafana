@@ -1,0 +1,12 @@
+{
+  "name": "prometheus-grafana",
+  "version": "1.0.0",
+  "description": "observability system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "main": "node run index.js"
+  },
+  "author": "Pedro Dantas",
+  "license": "ISC"
+}
