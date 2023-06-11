@@ -23,5 +23,12 @@ const histogram = (name, help, buckets) => {
   });
 };
 
-module.exports = { counter, gauge, histogram };
+const summary = (name, help) => {
+  return new client.Summary({
+    name: name,
+    help: help,
+  });
+}
+
+module.exports = { counter, gauge, histogram, summary };
 
