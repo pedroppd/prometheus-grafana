@@ -1,6 +1,6 @@
 const prom = require('prom-client');
 
-counter = (name, help) => {
+const counter = (name, help) => {
   return new prom.Counter({
     name: name,
     help: help,
@@ -8,12 +8,20 @@ counter = (name, help) => {
   });
 };
 
-gauge = (name, help) => {
+const gauge = (name, help) => {
   return new prom.Gauge({
     name: name,
     help: help
   });
 };
 
-module.exports = { counter, gauge };
+const histogram = (name, help, buckets) => {
+  return new prom.Histogram({
+    name: name,
+    help: help,
+    buckets: buckets,
+  });
+};
+
+module.exports = { counter, gauge, histogram };
 
